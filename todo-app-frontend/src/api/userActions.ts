@@ -5,7 +5,7 @@ import { IRegister } from "@/interface/IRegister";
 
 export async function userLogin({ email, password }: ILogin): Promise<void> {
 
-    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/user/login`, {
+    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export async function userLogin({ email, password }: ILogin): Promise<void> {
 
 export async function userRegister({ name,email, password }: IRegister): Promise<void> {
 
-    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/user/register`, {
+    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/user/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ import { organizeCategories } from "@/helpers/organizeCategories";
 const {token, userId} = auth()
 
 export async function getCategories(): Promise<ICategory[]> {
-    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/category/get`, {
+    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/get`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -22,7 +22,7 @@ export async function getCategories(): Promise<ICategory[]> {
 }
 
 export async function createCategory(name: string ): Promise<void> {
-    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/category/create`, {
+    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export async function createCategory(name: string ): Promise<void> {
 }
 
 export async function updateCategory(userCategoryId: string, name: string ): Promise<void> {
-    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/category/update`, {
+    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/update`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export async function updateCategory(userCategoryId: string, name: string ): Pro
 }
 
 export async function deleteCategory(id: string, ): Promise<void> {
-    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/category/delete`, {
+    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/delete`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

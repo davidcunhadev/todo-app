@@ -1,12 +1,11 @@
 import { ITodo } from "@/interface/todo/ITodo";
 import { auth } from "./auth";
 import { ICreateTodo } from "@/interface/todo/ICreateTodo";
-import { API_URL } from "./apiURL";
 
 const {token,userId} = auth()
 
 export async function createTodo({title,description,category}: ICreateTodo): Promise<void> {
-    const response = await fetch(`${API_URL}/todo/create`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +21,7 @@ export async function createTodo({title,description,category}: ICreateTodo): Pro
 
 export async function getTodos( search: string, ): Promise<ITodo[]> {
     const searchValue = search === 'todas' ? '' : search
-    const response = await fetch(`${API_URL}/todo/get?category=${searchValue}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/get?category=${searchValue}`, {
         headers: {
             Authorization: `Bearer ${token}`, 
         },
@@ -37,7 +36,7 @@ export async function getTodos( search: string, ): Promise<ITodo[]> {
 }
 
 export async function getImportantsTodos(): Promise<ITodo[]> {
-    const response = await fetch(`${API_URL}/todo/important`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/important`, {
         headers: {
             Authorization: `Bearer ${token}`, 
         },
@@ -52,7 +51,7 @@ export async function getImportantsTodos(): Promise<ITodo[]> {
 }
 
 export async function getCompletedTodos(): Promise<ITodo[]> {
-    const response = await fetch(`${API_URL}/todo/completed`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/completed`, {
         headers: {
             Authorization: `Bearer ${token}`, 
         },
@@ -67,7 +66,7 @@ export async function getCompletedTodos(): Promise<ITodo[]> {
 }
 
 export async function getTodoById(todoId:string): Promise<ITodo> {
-    const response = await fetch(`${API_URL}/todo/todo-id/${todoId}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/todo-id/${todoId}`, {
         headers: {
             Authorization: `Bearer ${token}`, 
         },
@@ -88,7 +87,7 @@ type UpdateTodo = {
     category: string,
 }
 export async function updateTodo({id,title,description,category}:UpdateTodo): Promise<void> {
-    const response = await fetch(`${API_URL}/todo/update`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/update`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -108,7 +107,7 @@ export type AddImportant = {
 }
 
 export async function addImportant({id, important}: AddImportant): Promise<void> {
-    const response = await fetch(`${API_URL}/todo/important`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/important`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -128,7 +127,7 @@ export type AddCompleted = {
 }
 
 export async function addCompleted({id, completed}: AddCompleted): Promise<void> {
-    const response = await fetch(`${API_URL}/todo/completed`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/completed`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -144,7 +143,7 @@ export async function addCompleted({id, completed}: AddCompleted): Promise<void>
 
 
 export async function deleteTodo(id: string, ): Promise<void> {
-    const response = await fetch(`${API_URL}/todo/delete`, {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}://${process.env.REACT_APP_API_PROTOCOL}/todo/delete`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

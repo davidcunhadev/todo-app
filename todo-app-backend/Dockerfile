@@ -13,8 +13,5 @@ RUN npm install
 COPY . .
 # Copy application files.
 
-EXPOSE 3001
-# Expose port 3001.
-
 CMD ["npm", "start"]
 # Start application in production mode.

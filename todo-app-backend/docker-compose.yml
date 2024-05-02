@@ -10,16 +10,17 @@ services:
       - 3001
     ports:
       - 3001:3001
+    environment:
+      DATABASE_URL: postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:${PGPORT}/${PGDATABASE}
+    command: sh -c "npm run p:generate && npm run p:migrate && npm start"
     depends_on:
-      - db  
+      - db
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001"]
       interval: 30s
       timeout: 30s
       retries: 3
-    networks:
-      - todo-network  
-
+  
   db:
     image:  postgres:16-alpine
     container_name: todo-db
@@ -27,23 +28,17 @@ services:
       - db-data:/var/lib/postgresql/data
     environment:
       PGHOST: ${PGHOST}
-      PGPORT:  ${PGPORT}
+      PGPORT: ${PGPORT}
       PGUSER: ${PGUSER}
       PGPASSWORD: ${PGPASSWORD}
       PGDATABASE: ${PGDATABASE}
     ports:
       - 5432:5432
-    healthcheck: 
+    healthcheck:
       test: ["CMD", "pg_isready"]
       interval: 30s
       timeout: 5s
       retries: 3
-    networks:
-      - todo-network
 
 volumes:
   db-data:
-
-networks:
-  todo-network:
-    driver: bridge

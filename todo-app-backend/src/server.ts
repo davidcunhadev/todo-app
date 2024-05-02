@@ -1,5 +1,5 @@
 import { App } from './app'
 
-const PORT = process.env.APP_PORT || 3002
+const PORT = process.env.APP_PORT
 
 new App().start( Number( PORT ) )

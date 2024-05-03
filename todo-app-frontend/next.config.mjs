@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import {config} from 'dotenv';
+config();
 const nextConfig = {
     async redirects() {
         return [
@@ -8,6 +10,9 @@ const nextConfig = {
             permanent: true,
           },
         ];
+      },
+      env: {
+        REACT_APP_API: process.env.REACT_APP_API
       },
 };
 

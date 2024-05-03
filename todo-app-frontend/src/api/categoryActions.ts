@@ -1,11 +1,12 @@
-import { ICategory } from "@/interface/category/ICategory";
 import { auth } from "./auth";
 import { organizeCategories } from "@/helpers/organizeCategories";
+import { apiUrl } from "./apiUrl";
+import { ICategory } from "@/interface/category/ICategory";
 
 const {token, userId} = auth()
 
 export async function getCategories(): Promise<ICategory[]> {
-    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/get`, {
+        const response = await fetch(`${apiUrl}category/get`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -22,7 +23,7 @@ export async function getCategories(): Promise<ICategory[]> {
 }
 
 export async function createCategory(name: string ): Promise<void> {
-    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/create`, {
+    const response = await fetch(`${apiUrl}category/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -39,7 +40,7 @@ export async function createCategory(name: string ): Promise<void> {
 }
 
 export async function updateCategory(userCategoryId: string, name: string ): Promise<void> {
-    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/update`, {
+    const response = await fetch(`${apiUrl}category/update`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ export async function updateCategory(userCategoryId: string, name: string ): Pro
 }
 
 export async function deleteCategory(id: string, ): Promise<void> {
-    const response = await fetch(`${process.env.REACT_APP_API_PROTOCOL}://${process.env.REACT_APP_API_HOST}/category/delete`, {
+    const response = await fetch(`${apiUrl}category/delete`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

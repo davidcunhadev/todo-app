@@ -88,7 +88,7 @@ function NavigationLink({ title, icoName, isSidebarCollapsed, id }: NavigationLi
           <button
             onClick={handleNavigate}
             type="button"
-            className={`flex gap-4 items-center cursor-pointer p-4 rounded-md transition-all hover:text-xl h-14`}>
+            className={`flex gap-4 items-center cursor-pointer p-4 rounded-md transition-all hover:text-lg h-14`}>
             <Icon iconname={icoName as IconNames} size={20} className="cursor-pointer" />
             {isSidebarCollapsed ? "" : capitalizeTaskTypeLetter(title)}
           </button>
@@ -115,7 +115,7 @@ function NavigationLink({ title, icoName, isSidebarCollapsed, id }: NavigationLi
       {openUpdateCategory && (
         <form onSubmit={handleSubmit(handleUpdateCategory)} >
           <label className={`flex gap-4 items-center px-3 border rounded-md border-blue-300 shadow-md w-[200px]}`} htmlFor="task">
-            <input {...register('name')} placeholder='Nome da lista' className={`${theme.theme === "dark" ? "text-white placeholder:text-white" : "text-blue-500 placeholder:text-blue-500"} w-full bg-transparent items-center transition-all h-14 outline-none rounded-md`} type="text" id="task" />
+            <input {...register('name')} placeholder='Nome da lista' maxLength={16} className={`${theme.theme === "dark" ? "text-white placeholder:text-white" : "text-blue-500 placeholder:text-blue-500"} w-full bg-transparent items-center transition-all h-14 outline-none rounded-md`} type="text" id="task" />
             <div className='flex flex-col items-center gap-1'>
               <button type='submit'>
                 <Icon iconname='Plus' size={17} className='transition-all cursor-pointer stroke-blue-500 hover:scale-125' />

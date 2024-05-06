@@ -86,7 +86,7 @@ function Sidebar() {
         {openCreateCategory && !isOpen ? (
           <form onSubmit={handleSubmit(handleSubmitCreateCategory)} >
             <label className={`flex gap-4 items-center px-3 border rounded-md border-blue-300 shadow-md ${isOpen ? 'hidden' : ' w-[200px]'}`} htmlFor="task">
-              <input {...register('name')}  placeholder='Nome da lista' className={`${theme.theme === "dark" ? "text-white placeholder:text-white" : "text-gray-700 placeholder:text-blue-500"} bg-transparent w-full items-center transition-all h-14 outline-none rounded-md`} type="text" id="task" />
+              <input {...register('name')}  placeholder='Nome da lista' maxLength={16} className={`${theme.theme === "dark" ? "text-white placeholder:text-white" : "text-gray-700 placeholder:text-blue-500"} bg-transparent w-full items-center transition-all h-14 outline-none rounded-md`} type="text" id="task" />
               <div className='flex flex-col items-center gap-1'>
                 <button type='submit'>
                   <Icon iconname='Plus' size={17} className='transition-all cursor-pointer stroke-blue-500 hover:scale-125' />

@@ -6,7 +6,7 @@ import { apiUrl } from "./apiUrl";
 
 export async function userLogin({ email, password }: ILogin): Promise<void> {
 
-    const response = await fetch(`${apiUrl}user/login`, {
+    const response = await fetch(`${apiUrl}/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export async function userLogin({ email, password }: ILogin): Promise<void> {
 
 export async function userRegister({ name,email, password }: IRegister): Promise<void> {
 
-    const response = await fetch(`${apiUrl}user/register`, {
+    const response = await fetch(`${apiUrl}/user/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

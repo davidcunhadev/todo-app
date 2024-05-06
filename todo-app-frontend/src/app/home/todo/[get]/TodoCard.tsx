@@ -10,10 +10,11 @@ import { useToggle } from '@/hooks/useToggle';
 import Transition from '@/app/transition';
 import { ITodo } from '@/interface/todo/ITodo';
 import { useSearchParams } from 'next/navigation';
-import { addCompleted, addImportant, deleteTodo, getImportantsTodos, getTodos } from '@/api/todoActions';
+import { addCompleted, addImportant, deleteTodo, getCompletedTodos, getImportantsTodos, getTodos } from '@/api/todoActions';
 import { todoState } from '@/store/atoms/todoState';
 import { useRecoilState } from 'recoil';
 import { themeState } from '@/store/atoms/themeState';
+import Swal from 'sweetalert2';
 
 type TodoCardProps = {
   todo: ITodo
@@ -33,7 +34,7 @@ export function TodoCard({ todo }: TodoCardProps) {
 
   const handleTodoReload = async () => {
     if (search) {
-      const todos = search === "importantes" ? await getImportantsTodos() : await getTodos(search)
+      const todos = search === "importantes" ? await getImportantsTodos() : search === "concluídas" ? await getCompletedTodos() : await getTodos(search)
       setTodos(todos)
     }
   }
@@ -42,9 +43,27 @@ export function TodoCard({ todo }: TodoCardProps) {
     let newImportantStatus;
     if (todo.important === true) {
         newImportantStatus = false;
+        Swal.fire({
+          background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+          color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+          showConfirmButton: false,
+          timer: 1500,
+          iconColor: 'rgb(16,185,129)',
+          icon: "success",
+          title: `Tarefa removida da lista!`
+        });
         handleTodoReload()
     } else {
         newImportantStatus = true;
+        Swal.fire({
+          background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+          color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+          showConfirmButton: false,
+          timer: 1500,
+          iconColor: 'rgb(16,185,129)',
+          icon: "success",
+          title: `Tarefa adicionada na lista de importantes!`
+        });
         handleTodoReload()
     }
 
@@ -58,9 +77,27 @@ export function TodoCard({ todo }: TodoCardProps) {
     let newCompletedStatus;
     if (todo.completed === true) {
         newCompletedStatus = false;
+        Swal.fire({
+          background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+          color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+          showConfirmButton: false,
+          timer: 1500,
+          iconColor: 'rgb(16,185,129)',
+          icon: "success",
+          title: `Tarefa removida da lista!`
+        });
         handleTodoReload()
     } else {
         newCompletedStatus = true;
+        Swal.fire({
+          background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+          color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+          showConfirmButton: false,
+          timer: 1500,
+          iconColor: 'rgb(16,185,129)',
+          icon: "success",
+          title: `Tarefa adicionada na lista de completas!`
+        });
         handleTodoReload()
     }
 
@@ -73,6 +110,15 @@ export function TodoCard({ todo }: TodoCardProps) {
   const handleDeleteTodo = async () => {
     await deleteTodo(todo.id)
     handleTodoReload()
+    return Swal.fire({
+      background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+      color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+      showConfirmButton: false,
+      timer: 1500,
+      iconColor: 'rgb(16,185,129)',
+      icon: "success",
+      title: `Tarefa deletada com sucesso!`
+    });
   }
 
   return (

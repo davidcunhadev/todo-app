@@ -8,6 +8,6 @@ export const updateTodoValues = {
 
 export const UpdateTodoSchema = z.object({
     title: z.string().min(6),
-    description: z.string().min(30),
+    description: z.string(),
     category: z.string()
 })

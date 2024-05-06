@@ -21,7 +21,7 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
   const [_, setTodos] = useRecoilState(todoState)
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
-  const { handleSubmit, register, reset, formState, watch } = useForm({
+  const { handleSubmit, register, reset, watch } = useForm({
     mode: 'onSubmit',
     defaultValues: createTodoValues || updateTodoValues,
     resolver: zodResolver(CreateTodoSchema || UpdateTodoSchema)
@@ -43,18 +43,27 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
         text: "O título deve conter pelo menos 6 caracteres."
       });
     }
+
+    if (watch(['category'])[0].length === 0) {
+      return Swal.fire({
+       background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+       color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+       iconColor: 'rgb(255, 0, 0)',
+       confirmButtonColor: 'rgb(16,185,129)',
+       icon: "error",
+       title: "Selecione uma categoria!"
+     });
+   }
     
-    if (watch(['description'])[0].length < 30) {
-       return Swal.fire({
-        background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
-        color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
-        iconColor: 'rgb(255, 0, 0)',
-        confirmButtonColor: 'rgb(16,185,129)',
-        icon: "error",
-        title: "Descrição inválida.",
-        text: "A descrição deve conter pelo menos 30 caracteres."
-      });
-    }
+    Swal.fire({
+      background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+      color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+      showConfirmButton: false,
+      timer: 1000,
+      iconColor: 'rgb(16,185,129)',
+      icon: "success",
+      title: `Tarefa criada com sucesso!`
+    });
 
     return closeModal()
   }
@@ -79,6 +88,15 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
       await updateTodo({ title, description, category, id })
       handleTodoReload()
       reset()
+      return Swal.fire({
+        background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
+        color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
+        showConfirmButton: false,
+        timer: 1300,
+        iconColor: 'rgb(16,185,129)',
+        icon: "success",
+        title: `Tarefa atualizada com sucesso!`
+      });
     }
   }
 

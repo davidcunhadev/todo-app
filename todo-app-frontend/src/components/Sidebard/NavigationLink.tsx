@@ -84,11 +84,10 @@ function NavigationLink({ title, icoName, isSidebarCollapsed, id }: NavigationLi
   return (
     <>                                                                                       
       {!openUpdateCategory && (
-        <section className={`flex items-center justify-between rounded-md ${theme.theme === "dark" ? "hover:bg-zinc-800 text-white" : "hover:bg-slate-100"}  ${isSelected && theme.theme === "dark" && "text-white bg-zinc-800"} ${isSelected && theme.theme === "light" && "text-gray-700 bg-blue-50"}`}>
+        <section onClick={handleNavigate} className={`flex items-center justify-between rounded-md cursor-pointer ${theme.theme === "dark" ? "hover:bg-zinc-800 text-white" : "hover:bg-slate-100"}  ${isSelected && theme.theme === "dark" && "text-white bg-zinc-800"} ${isSelected && theme.theme === "light" && "text-gray-700 bg-blue-50"}`}>
           <button
-            onClick={handleNavigate}
             type="button"
-            className={`flex gap-4 items-center cursor-pointer p-4 rounded-md transition-all hover:text-lg h-14`}>
+            className={`flex gap-4 items-center cursor-pointer p-4 rounded-md transition-all h-14`}>
             <Icon iconname={icoName as IconNames} size={20} className="cursor-pointer" />
             {isSidebarCollapsed ? "" : capitalizeTaskTypeLetter(title)}
           </button>

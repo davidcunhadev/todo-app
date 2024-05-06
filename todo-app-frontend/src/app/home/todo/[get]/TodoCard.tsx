@@ -3,10 +3,8 @@
 import React, { useState } from 'react';
 
 import Icon from '@/components/Icon';
-import TodoDescription from './TodoDescription';
 import TodoModal from './TodoModal';
 
-import { extractStringsWithPosition } from '@/helpers/extractStringsWithPosition';
 import { formatDateTime } from '@/helpers/formatDateTime';
 import { useToggle } from '@/hooks/useToggle';
 import Transition from '@/app/transition';
@@ -77,8 +75,6 @@ export function TodoCard({ todo }: TodoCardProps) {
     handleTodoReload()
   }
 
-  const descriptionParts = extractStringsWithPosition(todo.description)
-
   return (
     <Transition>
 
@@ -117,7 +113,7 @@ export function TodoCard({ todo }: TodoCardProps) {
 
         <section className={openTodo ? 'transition ease-out duration-300 transform flex flex-col gap-4' : 'hidden'}>
 
-          <TodoDescription descriptionParts={descriptionParts} description={todo.description} />
+          <p>{todo.description}</p>
           <footer className="px-3  pt-3 flex w-fit flex-col text-[10px] text-start">
             <span >Criado em: {formatDateTime(String(todo.createdAt))}</span>
             <span>Atualizado em: {formatDateTime(String(todo.updatedAt))}</span>

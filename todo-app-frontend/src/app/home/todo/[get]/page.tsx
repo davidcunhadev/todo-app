@@ -19,7 +19,6 @@ import { auth } from '@/api/auth';
 import { themeState } from '@/store/atoms/themeState';
 import { Theme } from '@/interface/ITheme';
 
-
 function Todos() {
 	const searchParams = useSearchParams()
 	const search = searchParams.get('category')
@@ -38,7 +37,7 @@ function Todos() {
 				const completedTodos = await getCompletedTodos()
 				return setTodos(completedTodos)
 			default:
-				const todos = await getTodos(String(search))		
+				const todos = await getTodos(String(search))
 				return setTodos(todos)
 		}
 		}

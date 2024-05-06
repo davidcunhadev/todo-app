@@ -29,7 +29,7 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
 
   const isCreateModal = modalType === 'create'
   
-  const nonRestrictedCategories = categories.filter((category) => category.name !== 'todas' && category.name !== 'importantes')
+  const nonRestrictedCategories = categories.filter((category) => category.name !== 'todas' && category.name !== 'importantes' && category.name !== 'concluídas')
 
   const handleSubmitFormErrors = () => {
     if (watch(['title'])[0].length < 6 ) {

@@ -89,9 +89,7 @@ function Todos() {
 			<header className="flex justify-between p-10 font-bold text-2xl ">
 				<div className={`flex gap-3 items-center ${theme.theme === "dark" ? "text-white" : "text-blue-500"} transition-all`}>
 					<Icon iconname={icon || 'BookmarkCheck'} size={28} />{capitalizeTaskTypeLetter(String(search))}
-					{todos.length === 0 ? (
-						''
-					) : (
+					{restrictedCategories && (
 						<button
 							className={`flex font-light ${theme.theme === "dark" ? "bg-zinc-700 hover:bg-zinc-500" : "bg-blue-400 hover:bg-blue-600"} transition-all rounded-md text-white`}
 							onClick={toggle}>

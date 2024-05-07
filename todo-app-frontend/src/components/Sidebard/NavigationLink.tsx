@@ -1,7 +1,7 @@
 import React from "react";
 import Icon, { IconNames } from "../Icon";
 import { useRouter, useSearchParams } from "next/navigation";
-import { capitalizeTaskTypeLetter } from "@/helpers/capitalizeFirstLetter";
+import { capitalizeFirstLetter } from "@/helpers/capitalizeFirstLetter";
 import { updateCategory, getCategories, deleteCategory } from "@/api/categoryActions";
 import { IUpdateCategory } from "@/interface/category/IUpdateCategory";
 import { useRecoilState } from "recoil";
@@ -89,7 +89,7 @@ function NavigationLink({ title, icoName, isSidebarCollapsed, id }: NavigationLi
             type="button"
             className={`flex gap-4 items-center cursor-pointer p-4 rounded-md transition-all h-14`}>
             <Icon iconname={icoName as IconNames} size={20} className="cursor-pointer" />
-            {isSidebarCollapsed ? "" : capitalizeTaskTypeLetter(title)}
+            {isSidebarCollapsed ? "" : capitalizeFirstLetter(title)}
           </button>
 
           <section

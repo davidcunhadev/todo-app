@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form"
 import { useRecoilState } from "recoil"
 import { themeState } from "@/store/atoms/themeState"
 import Swal from "sweetalert2"
-import { useEffect, useState } from "react"
+import { capitalizeFirstLetter } from "@/helpers/capitalizeFirstLetter"
 
 function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
   const [theme, __] = useRecoilState(themeState)
@@ -30,7 +30,7 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
 
   const isCreateModal = modalType === 'create'
   
-  const nonRestrictedCategories = categories.filter((category) => category.name !== 'todas' && category.name !== 'importantes' && category.name !== 'concluídas' && category.name !== search)
+  const nonRestrictedCategories = categories.filter((category) => category.name !== 'todas' && category.name !== 'importantes' && category.name !== 'concluídas')
 
   const handleSubmitFormErrors = () => {
     if (watch(['title'])[0].length < 6 ) {
@@ -62,7 +62,7 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
       timer: 1000,
       iconColor: 'rgb(16,185,129)',
       icon: "success",
-      title: `Tarefa criada com sucesso!`
+      title: `Tarefa ${isCreateModal ? 'criada' : 'atualizada'} com sucesso!`
     });
  
   return closeModal()
@@ -91,10 +91,6 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
   }
 
   const handleRequest = isCreateModal ? handleCreateTodo : handleUpdateTodo
-
-  if (!search) {
-    throw new Error('Error')
-  }
   
   return (
     <section
@@ -122,13 +118,12 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
         </label>
         <label htmlFor="categories" className={`text-lg  font-bold ${theme.theme === "dark" ? "text-zinc-400" : "text-blue-500"}`}>Escolha uma categoria:</label>
         <select
-          value={isCreateModal ? search : watch(['category'])[0]}
           {...register("category")}
           className={`rounded-md p-2 text-lg border-0 ${theme.theme === "dark" ? "text-zinc-400 bg-zinc-900" : "text-blue-500 bg-transparent"} outline-none`} id="categories">
-           {isCreateModal && <option value={search}>{search}</option> } 
-          {!isCreateModal && nonRestrictedCategories.map((category) => (
+          <option value=''>Categoria</option>
+          {nonRestrictedCategories.map((category) => (
             <option key={category.id} value={category.name}>
-              {category.name}
+              {capitalizeFirstLetter(category.name)}
             </option>
           ))}
         </select>

@@ -15,6 +15,7 @@ import { todoState } from '@/store/atoms/todoState';
 import { useRecoilState } from 'recoil';
 import { themeState } from '@/store/atoms/themeState';
 import Swal from 'sweetalert2';
+import { capitalizeFirstLetter } from '@/helpers/capitalizeFirstLetter';
 
 type TodoCardProps = {
   todo: ITodo
@@ -125,13 +126,13 @@ export function TodoCard({ todo }: TodoCardProps) {
     <Transition>
 
       <section
-        className={`flex flex-col ${theme.theme === "dark" ? "bg-zinc-800 text-white hover:bg-zinc-600" : "bg-blue-50 hover:bg-blue-100 text-zinc-700"} p-2 rounded-md py-5 px-8 gap-4 mt-5 cursor-pointer`} key={todo.id} id={todo.id} >
+        className={`flex flex-col ${theme.theme === "dark" ? "bg-zinc-800 text-white hover:bg-zinc-600" : "bg-blue-50 hover:bg-blue-100 text-zinc-700"} rounded-md px-8 gap-4 mt-5 cursor-pointer`} key={todo.id} id={todo.id} >
 
         < TodoModal id={todo.id} openModal={isOpen} closeModal={toggle} modalType='update' />
 
-        <section className="text-lg flex w-full justify-between pl-1 ">
+        <section className="text-lg flex w-full justify-between pl-1">
 
-          <section className="flex items-center w-full gap-2" onClick={handleOpenTodo}>
+          <section className="flex items-center w-full gap-2 py-5" onClick={handleOpenTodo}>
             <Icon iconname="Bookmark" className={`${theme.theme === "dark" ? "fill-white text-white" : "fill-blue-500 text-blue-500"}`} size={20} />
 
             <span className="cursor-pointer">{todo.title}</span>
@@ -157,12 +158,15 @@ export function TodoCard({ todo }: TodoCardProps) {
 
         </section>
 
-        <section className={openTodo ? 'transition ease-out duration-300 transform flex flex-col gap-4' : 'hidden'}>
+        <section className={openTodo ? 'transition ease-out duration-300 transform flex flex-col gap-4' : 'hidden'} onClick={handleOpenTodo}>
 
-          <p>{todo.description}</p>
-          <footer className="px-3  pt-3 flex w-fit flex-col text-[10px] text-start">
-            <span >Criado em: {formatDateTime(String(todo.createdAt))}</span>
+          <p className='px-1 break-all'>{todo.description}</p>
+          <footer className="px-1 py-3 flex justify-between w-full text-[10px] text-start">
+            <div className='flex flex-col'>
+            <span>Criado em: {formatDateTime(String(todo.createdAt))}</span>
             <span>Atualizado em: {formatDateTime(String(todo.updatedAt))}</span>
+            </div>
+            <span className='flex items-end'>Categoria: {capitalizeFirstLetter(todo.category)}</span>
           </footer>
         </section>
 

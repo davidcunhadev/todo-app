@@ -15,11 +15,13 @@ import { useRecoilState } from "recoil"
 import { themeState } from "@/store/atoms/themeState"
 import Swal from "sweetalert2"
 import { capitalizeFirstLetter } from "@/helpers/capitalizeFirstLetter"
+import { useState } from "react"
 
 function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
   const [theme, __] = useRecoilState(themeState)
   const [categories,] = useRecoilState(categoryState)
   const [_, setTodos] = useRecoilState(todoState)
+  const [error, setError] = useState(false)
   const searchParams = useSearchParams()
   const search = searchParams.get('category')
   const { handleSubmit, register, watch, reset } = useForm({
@@ -28,7 +30,7 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
     resolver: zodResolver(CreateTodoSchema || UpdateTodoSchema)
   })
 
-  const isCreateModal = modalType === 'create'
+  const isCreateModal = modalType === 'create'  
   
   const nonRestrictedCategories = categories.filter((category) => category.name !== 'todas' && category.name !== 'importantes' && category.name !== 'concluídas')
 
@@ -46,6 +48,7 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
     }
 
     if (watch(['category'])[0].length === 0) {
+      setError(true)
       return Swal.fire({
        background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
        color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
@@ -55,6 +58,7 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
        title: "Selecione uma categoria!"
      });
    }
+   setError(false)
     Swal.fire({
       background: `${theme.theme === "dark" ? 'rgb(25,25,25)' : 'rgb(239, 246, 255)'}`,
       color: `${theme.theme === "dark" ? 'rgb(255,255,255)' : 'rgb(24, 24, 27)'}`,
@@ -84,6 +88,9 @@ function TodoModal({ id, openModal, closeModal, modalType }: ModalProps) {
   }
 
   const handleUpdateTodo = async ({ title, description, category }: IUpdateTodo) => {
+    if (error) {
+      return
+    }
     if (id) {
       await updateTodo({ title, description, category, id })
       handleTodoReload()

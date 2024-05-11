@@ -63,7 +63,7 @@ export class CategoryRepository implements ICategoryRepository {
 	async updateCategory ( param: IUpdateCategory ): Promise<void> {
 		const { name , userCategoryId } = param
 
-		const cateogryAlreadyExists = await this.prisma.category.findUnique({
+		const categoryAlreadyExists = await this.prisma.category.findUnique({
 			where : {
 				name
 			}
@@ -75,13 +75,13 @@ export class CategoryRepository implements ICategoryRepository {
 			}
 		})
 
-		if ( cateogryAlreadyExists ) {
+		if ( categoryAlreadyExists ) {
 			await this.prisma.userCategory.update({
 				where : {
 					id : userCategoryId ,
 				} ,
 				data : {
-					categoryId : cateogryAlreadyExists.id
+					categoryId : categoryAlreadyExists.id
 				}
 			})
 
@@ -90,13 +90,13 @@ export class CategoryRepository implements ICategoryRepository {
 					categoryId : userCategory?.categoryId
 				} ,
 				data : {
-					categoryId : cateogryAlreadyExists.id
+					categoryId : categoryAlreadyExists.id
 				}
 
 			})
 		}
 
-		if ( !cateogryAlreadyExists ) {
+		if ( !categoryAlreadyExists ) {
 			const newCategory = await this.prisma.category.create({
 				data : {
 					name
@@ -130,11 +130,11 @@ export class CategoryRepository implements ICategoryRepository {
 	}
 
 	async deleteCategory ( param: IDeleteCategory ): Promise<void> {
-		const { id } = param
+		const { userCategoryId } = param
 
 		const existingCategory = await this.prisma.userCategory.findUnique({
 			where : {
-				id
+				id : userCategoryId
 			}
 		})
 
@@ -158,7 +158,7 @@ export class CategoryRepository implements ICategoryRepository {
 
 		await this.prisma.userCategory.deleteMany({
 			where : {
-				id
+				id : userCategoryId
 			} ,
 		})
 	}

@@ -8,6 +8,6 @@ export class GetCategoriesController {
 		const { userId } = req.body
 		const categories = await this.useCase.execute( userId )
 
-		res.status( 201 ).json( categories )
+		res.status( 200 ).json( categories )
 	}
 }

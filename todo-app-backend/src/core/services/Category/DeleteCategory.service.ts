@@ -6,10 +6,10 @@ export class DeleteCategory implements UseCase<IDeleteCategory , void> {
 	constructor ( private readonly categoryRepository: ICategoryRepository ) {}
 
 	async execute ( param: IDeleteCategory ): Promise<void> {
-		const { id } = param
+		const { userCategoryId } = param
 
 		await this.categoryRepository.deleteCategory({
-			id
+			userCategoryId
 		})
 	}
 }

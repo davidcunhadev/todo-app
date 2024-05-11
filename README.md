@@ -1,7 +1,7 @@
 
-# ✅📝 Todo List ✅📝
+<h1 align="center">✅📝 Todo List ✅📝</h1> 
 
-O Todo List é uma aplicação para criação de lista de tarefas, que permite que os usuários possam gerenciar suas atividades diárias, permitindo que criem, visualizem, editem e removam tarefas de forma fácil e eficiente.
+<h3 align="center">O Todo List é uma aplicação para criação de lista de tarefas, que permite que os usuários possam gerenciar suas atividades diárias, permitindo que criem, visualizem, editem e removam tarefas de forma fácil e eficiente.</h3>
 
 <br>
 
@@ -58,7 +58,7 @@ O projeto segue a seguinte estrutura de pastas:
 
 - Tela de Login
 
-![LoginScreen](/todo-app-frontend/public/LoginScreen.png)
+![LoginScreen](/todo-app-frontend/publicLoginScreen.png)
 
 - Tela de Registro
 
@@ -74,13 +74,17 @@ O projeto segue a seguinte estrutura de pastas:
 
 - Criando Categoria na Sidebar
 
-![CreatingCategory](/todo-app-frontend/public/CreatingCategoryScreen.png)
+<p align="center">
+  <img src="/todo-app-frontend/public/CreatingCategoryScreen.png" alt="CreatingCategoryScreen">
+</p>
 
 <br>
 
 - Categoria Criada com Sucesso
 
-![CreatedCategory](/todo-app-frontend/public/CreatedCategoryScreen.png)
+<p align="center">
+  <img src="/todo-app-frontend/public/CreatedCategoryScreen.png" alt="CreatedCategoryScreen">
+</p>
 
 <br>
 

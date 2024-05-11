@@ -57,14 +57,14 @@ export async function updateCategory(userCategoryId: string, name: string ): Pro
     }
 }
 
-export async function deleteCategory(id: string, ): Promise<void> {
+export async function deleteCategory(userCategoryId: string, ): Promise<void> {
     const response = await fetch(`${apiUrl}/category/delete`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({ userCategoryId }),
     });
 
     if (!response.ok) {

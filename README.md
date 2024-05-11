@@ -58,7 +58,7 @@ O projeto segue a seguinte estrutura de pastas:
 
 - Tela de Login
 
-![LoginScreen](/todo-app-frontend/publicLoginScreen.png)
+![LoginScreen](/todo-app-frontend/public/LoginScreen.png)
 
 - Tela de Registro
 
@@ -358,7 +358,7 @@ Sinta-se livre para dar feedbacks, entrar em contato e se conectar para novas id
 
 - [Email](mailto:contatodavidcunha@hotmail.com)
 - [LinkedIn](https://www.linkedin.com/in/davidlcunha/)
-## 🤜🤛Autores
+## 🤜🤛 Autores
 
 - [@davidcunhadev](https://www.github.com/davidcunhadev)
 - [@markoclimakodev](https://www.github.com/markoclimakodev)

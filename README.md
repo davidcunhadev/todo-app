@@ -346,10 +346,6 @@ O projeto segue a seguinte estrutura de pastas:
 
 <hr>
 
-## 🚀 Deploy
-
-Você pode conferir a aplicação rodando nesta URL: https://todo-list-app.up.railway.app/
-
 ## 📫 Contato
 
 Contribuições são sempre bem-vindas!

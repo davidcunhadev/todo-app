@@ -16,7 +16,6 @@
 ## ✨ Funcionalidades
 
 - Temas dark e light.
-- Responsividade para vários dispositivos como smartphones, tablets e desktops.
 - Criar/logar sua conta.
 - Criar/Editar/Excluir categorias.
 - Criar/Editar/Excluir tarefas.
